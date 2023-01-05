@@ -1,0 +1,58 @@
+
+
+.notlogin-grid {
+    display:grid;
+    grid-template-columns: 40% auto;
+}
+
+.greeting
+  {
+    text-align: right;
+}
+
+.notelist {
+    border: solid black 5px;
+    border-radius: 10px;
+    overflow: scroll;
+    width:300px;
+    height: 400px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.date {
+    font-size: 10px;
+}
+
+.reloadbutton {
+    background-color:#9198e5 ;
+    padding: 5px 10px 5px 10px;
+    border-radius: 50% 50%;
+    cursor: pointer;
+    
+}
+
+.newbutton {
+    padding: 5px 10px;
+    margin-left: 260px;
+    font-size: 20px;
+    border: black solid 2px;
+    border-radius: 10px;
+    background-color: #FFD387;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+
+.listgrid-container {
+    display:grid;
+    grid-template-columns: 40% auto;
+    width: 1200px;
+    margin:auto;
+}
+
+.Link {
+    text-decoration-line: none;
+}

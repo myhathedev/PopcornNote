@@ -1,0 +1,43 @@
+<svg width="447" height="552" viewBox="0 0 447 552" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="NoteSticker">
+<g id="Group 1">
+<rect id="Rectangle 1" x="44" y="49" width="366" height="453" rx="41" fill="#FFCE69"/>
+<g id="Mask group">
+<mask id="mask0_7_55" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="44" y="49" width="366" height="453">
+<rect id="Rectangle 5" x="51.5" y="56.5" width="351" height="438" rx="33.5" fill="#F9F5F3" stroke="black" stroke-width="15"/>
+</mask>
+<g mask="url(#mask0_7_55)">
+<rect id="Rectangle 6" x="44" y="145" width="366" height="355" fill="#F9F5F3"/>
+</g>
+</g>
+<path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M352.223 492H368.508C391.152 492 409.508 473.644 409.508 451V100C409.508 77.3563 391.152 59 368.508 59H343.381C366.025 59 384.381 77.3563 384.381 100V451.956C384.381 471.564 370.617 487.957 352.223 492Z" fill="#BA7B56" fill-opacity="0.4"/>
+<rect id="Rectangle 5_2" x="51.5" y="56.5" width="351" height="438" rx="33.5" stroke="black" stroke-width="15"/>
+</g>
+<g id="text3">
+<line id="Line 11" x1="208.5" y1="401.5" x2="359.5" y2="401.5" stroke="#EBBFA9" stroke-opacity="0.68" stroke-width="15" stroke-linecap="round"/>
+<line id="Line 6" x1="202.5" y1="394.5" x2="353.5" y2="394.5" stroke="black" stroke-width="15" stroke-linecap="round"/>
+</g>
+<g id="text4">
+<line id="Line 10" x1="104.5" y1="351.5" x2="359.5" y2="351.5" stroke="#EBBFA9" stroke-opacity="0.68" stroke-width="15" stroke-linecap="round"/>
+<line id="Line 5" x1="97.5" y1="344.5" x2="353.5" y2="344.5" stroke="black" stroke-width="15" stroke-linecap="round"/>
+</g>
+<g id="text3_2">
+<line id="Line 9" x1="104.5" y1="297.5" x2="359.5" y2="297.5" stroke="#EBBFA9" stroke-opacity="0.68" stroke-width="15" stroke-linecap="round"/>
+<line id="Line 4" x1="97.5" y1="291.5" x2="353.5" y2="291.5" stroke="black" stroke-width="15" stroke-linecap="round"/>
+</g>
+<g id="text2">
+<line id="Line 8" x1="104.5" y1="245.5" x2="359.5" y2="245.5" stroke="#EBBFA9" stroke-opacity="0.68" stroke-width="15" stroke-linecap="round"/>
+<line id="Line 3" x1="97.5" y1="238.5" x2="353.5" y2="238.5" stroke="black" stroke-width="15" stroke-linecap="round"/>
+</g>
+<g id="text1">
+<line id="Line 7" x1="104.5" y1="194.5" x2="280.5" y2="194.5" stroke="#EBBFA9" stroke-opacity="0.68" stroke-width="15" stroke-linecap="round"/>
+<line id="Line 2" x1="97.5" y1="188.5" x2="273.5" y2="188.5" stroke="black" stroke-width="15" stroke-linecap="round"/>
+</g>
+<line id="Line 1" x1="52" y1="137.5" x2="403" y2="137.5" stroke="black" stroke-width="15"/>
+<g id="Group 2">
+<rect id="Rectangle 2" x="121.5" y="21.5" width="37" height="66" rx="18.5" fill="#ABC4D6" stroke="black" stroke-width="15"/>
+<rect id="Rectangle 3" x="208.5" y="21.5" width="37" height="66" rx="18.5" fill="#ABC4D6" stroke="black" stroke-width="15"/>
+<rect id="Rectangle 4" x="295.5" y="21.5" width="37" height="66" rx="18.5" fill="#ABC4D6" stroke="black" stroke-width="15"/>
+</g>
+</g>
+</svg>

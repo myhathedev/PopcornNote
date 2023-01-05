@@ -1,0 +1,25 @@
+.navbar {
+    background-color:  #9198e5;
+    text-align: right;
+    height: 50px;
+}
+
+.navitem {
+    text-decoration-line: none;
+}
+
+nav li {
+    display: inline-block;
+    height: 35px;
+    width: 150px;
+    text-align: center;
+    padding-top: 15px;
+    color: white;
+    font-weight:500;
+    font-size: 16px;
+}
+
+nav li:hover {
+    background-color: bisque;
+    color:#646fe4;
+}
