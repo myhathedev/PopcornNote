@@ -7,8 +7,8 @@ import ContactUs from './ContactUs.js';
 import Note from './Note.js';
 import NewNote from "./container/NewNote";
 import Read from "./container/Read";
-import SignUp from "./container/Signup";
-import CreateUsername from "./container/Createusername";
+import SignUp from "./Signup";
+import Createusername from "./Createusername";
 
 function Links() {
   return (
@@ -17,7 +17,7 @@ function Links() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/createusername" element={<CreateUsername />} />
+            <Route path="/createusername" element={<Createusername />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/note" element={<Note />} >
                 <Route path="create" element={<NewNote />}/>

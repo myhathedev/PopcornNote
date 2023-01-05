@@ -9,7 +9,6 @@ import Popcorncry from "./popcorncry";
 export default function Note() {
     const [note,setNote] = useState([]);
     const navigate = useNavigate();
-    const reload= () => {navigate(0)};
     const {user} = useUser();
 
 
@@ -33,7 +32,7 @@ export default function Note() {
             <div className ="listgrid-container">
                 <div > 
                 <Link to="/note/create" className="newbutton">New</Link> 
-                    <p className="yournote">Your Note <span className="reloadbutton" onClick={reload}><i class="fa-sharp fa-solid fa-arrows-rotate"></i></span></p> 
+                    <p className="yournote">Your Note <span className="reloadbutton" onClick={()=> {navigate("/note")}}><i className="fa-sharp fa-solid fa-arrows-rotate"></i></span></p> 
                     <div className="notelist">
                         {note.map( i => 
                             <Link to={`/note/${i._id}`} key={i._id}> <div >

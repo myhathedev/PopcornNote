@@ -10,7 +10,8 @@ export default function SignUp() {
     const nav = useNavigate();
     
 
-    const createAccount = async () => {
+    const createAccount = async (event) => {
+        event.preventDefault();
         try {
             if (password !== cpassword) {
                 setError('Password does not match.');
@@ -45,12 +46,12 @@ export default function SignUp() {
             </input> <br/>
             <label htmlFor="cpassword">Confirm Password: </label> <br />
             <input 
-                type="cpassword" name="cpassword"
+                type="password" name="cpassword"
                 value={cpassword}
                 onChange={e => setCpassword(e.target.value)}
                 >
             </input> <br/>
-            <input type="submit" name="submit" value="Sign In"></input>
+            <input type="submit" name="submit" value="Sign Up"></input>
         </form>
         <Link  to="/login"> <p>Already has an account? Log In </p></Link>
         </>

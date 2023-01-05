@@ -21,7 +21,7 @@ app.use(async (req,res,next) =>{
     const {authtoken } = req.headers;
     if (authtoken) {
         try {
-        req.user = await admin.auth().veryfyIdToken(authtoken); }
+        req.user = await admin.auth().verifyIdToken(authtoken); }
             catch (e) {
                 return res.sendStatus(400);
             }
@@ -29,6 +29,7 @@ app.use(async (req,res,next) =>{
         req.user = req.user || {};
         next();
 })
+
 
 app.use((req,res,next) => {
     if (req.user) {
@@ -38,20 +39,24 @@ app.use((req,res,next) => {
     }
 })
 
-app.post('/api/notelist/signup/:username', async (req,res) => {
+//create user
+app.post('/api/signup/:username', async (req,res) => {
     const {username} = req.params;
     const {uid} = req.user;
 
-    if (! (await db.collection('users').findOne({username}))) {
+    if ((await db.collection('users').findOne({username}))) {
+        res.send({'status':false});
+        return;
+    } else {
         await db.collection('users').insertOne({
-            username: username, 
             uid: uid,
+            username: username, 
             originalCount:0, 
             updatedCount:0}); 
-    } else {
-        res.json({'status':false})
+        res.send({'status':'ok'});     
     }
 });
+
 
 
 app.post('/api/notelist/post', async (req,res) => {
