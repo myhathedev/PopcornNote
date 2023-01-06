@@ -10,11 +10,16 @@ export default function Note() {
     const [note,setNote] = useState([]);
     const navigate = useNavigate();
     const {user} = useUser();
+    const [username,setUsername] = useState();
 
 
     useEffect( () => {
         const load = async () => {
         const token = user && await user.getIdToken();
+        const uid = user &&  user.uid ;
+        console.log(uid);
+        const response = await axios.get(`http://localhost:8000/api/getusername/${uid}`);
+        setUsername(response.data);
         const respond = await axios.get("http://localhost:8000/api/notelist/list",
         {headers : {authtoken : token}});
         const newnote = respond.data;
@@ -27,8 +32,9 @@ export default function Note() {
     
     return (
         <div className="notepage">
-            <p className="greeting">Hello, friend!</p>
         {user ? 
+            <div>
+            <p className="greeting">Hello, {username}!</p>
             <div className ="listgrid-container">
                 <div > 
                 <Link to="/note/create" className="newbutton">New</Link> 
@@ -45,6 +51,7 @@ export default function Note() {
                 <div>
                     <Outlet />
                 </div>
+            </div>
             </div>
             : <div className="notlogin-grid">
                 <div>

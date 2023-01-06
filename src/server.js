@@ -30,6 +30,20 @@ app.use(async (req,res,next) =>{
         next();
 })
 
+//get username
+app.get('/api/getusername/:uid',async (req,res) => {
+    const {uid} = req.params;
+    const response = await db.collection('users').findOne({uid : uid});
+    console.log(uid);
+    if (response) {
+        res.send(response.username);
+        console.log(response.username)
+        return;
+    } else {
+         res.send('Meow!');
+    }
+    
+});
 
 app.use((req,res,next) => {
     if (req.user) {
@@ -59,16 +73,15 @@ app.post('/api/signup/:username', async (req,res) => {
 
 
 
-app.post('/api/notelist/post', async (req,res) => {
+//new note
+app.post('/api/notelist/post/:username', async (req,res) => {
     const {title, content}= req.body;
+    const {username} = req.params ;
     const {uid} = req.user;
-   
-    await db.collection('users').updateOne({uid}, {$inc: {originalCount:1,updatedCount:1}});
-    const user = await db.collection('users').findOne({uid});
-    const id = (user.originalCount)+uid;
+    await db.collection('users').updateOne({username}, {$inc: {originalCount:1,updatedCount:1}});
     await db.collection('notelist').insertOne({
-        _id: id,
-        user: uid, 
+        username: username, 
+        uid: uid,
         title,
         content,
         date: Date()
@@ -77,11 +90,15 @@ app.post('/api/notelist/post', async (req,res) => {
    res.send(list);
 });
 
+//show list
 app.get('/api/notelist/list',async (req,res) => {
     const {uid} = req.user;
     res.send(await db.collection('notelist').find({uid}).toArray());
 });
 
+
+
+//update note
 app.post('/api/notelist/:id/update',async (req,res) => {
     const {id} = req.params;
     await db.collection('notelist').updateOne({_id:id},{$set : {title: req.body.title,content: req.body.content }}) 

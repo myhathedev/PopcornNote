@@ -9,14 +9,21 @@ export default function NewNote() {
     const [content,setContent] = useState('');
     const [noti,setNoti] = useState('');
     const {user} = useUser();
+
+    
+
     //make the variable become JSON
    
 
     const handleSubmit  =  async (event) => {
         event.preventDefault();
         const token = user && await user.getIdToken();
-        await axios.post(`http://localhost:8000/api/notelist/post`, { title: title,content: content,},
-        { "headers" : { "Content-Type": "application/json",authtoken : token }})
+        const uid = user &&  user.uid ;
+        console.log(uid);
+        const response = await axios.get(`http://localhost:8000/api/getusername/${uid}`);
+        const username = response.data;
+        await axios.post(`http://localhost:8000/api/notelist/post/${username}`, { title: title,content: content},
+        { "headers" : { "Content-Type": "application/json", authtoken : token,}})
         .catch(function(error) {console.log(error);});
         setContent('');
         setTitle('');

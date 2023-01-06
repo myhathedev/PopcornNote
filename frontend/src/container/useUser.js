@@ -5,14 +5,14 @@ export default function useUser() {
     const [user,setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
+    useEffect( () => {
         const unsubscribe = onAuthStateChanged(getAuth(), user => {
             setUser(user);
-            setIsLoading(false);
-        });
+            setIsLoading(false); });
         return unsubscribe;
     },[])
 
-    return {user,isLoading};
+    return {user, isLoading};
 
 }
+
