@@ -9,17 +9,12 @@ import Popcorncry from "./popcorncry";
 export default function Note() {
     const [note,setNote] = useState([]);
     const navigate = useNavigate();
-    const {user} = useUser();
-    const [username,setUsername] = useState();
-
+    const {user,isLoading} = useUser();
 
     useEffect( () => {
         const load = async () => {
         const token = user && await user.getIdToken();
-        const uid = user &&  user.uid ;
-        console.log(uid);
-        const response = await axios.get(`http://localhost:8000/api/getusername/${uid}`);
-        setUsername(response.data);
+        //list notes
         const respond = await axios.get("http://localhost:8000/api/notelist/list",
         {headers : {authtoken : token}});
         const newnote = respond.data;
@@ -27,23 +22,24 @@ export default function Note() {
         } 
         load();}
     ,[user])
-
-    console.log( note.map( i => i.title ));
     
     return (
+        <>
+        {isLoading? 
+        <p>Loading...</p>
+        :
         <div className="notepage">
-        {user ? 
+        { user ? 
             <div>
-            <p className="greeting">Hello, {username}!</p>
             <div className ="listgrid-container">
                 <div > 
                 <Link to="/note/create" className="newbutton">New</Link> 
-                    <p className="yournote">Your Note <span className="reloadbutton" onClick={()=> {navigate("/note")}}><i className="fa-sharp fa-solid fa-arrows-rotate"></i></span></p> 
+                    <p className="yournote">Your Note <span className="reloadbutton" onClick={()=> {navigate(0)}}><i className="fa-sharp fa-solid fa-arrows-rotate"></i></span></p> 
                     <div className="notelist">
                         {note.map( i => 
-                            <Link to={`/note/${i._id}`} key={i._id}> <div >
+                            <Link className="link" to={`/note/${i._id}`} key={i._id}> <div >
                                 <p>{i.title} </p>
-                                <p className="date">{i.date}</p>
+                                <p className="date">Last updated: {i.dateupdated}</p>
                             </div> </Link>
                         )}
                     </div>
@@ -57,12 +53,17 @@ export default function Note() {
                 <div>
                     <Popcorncry />
                 </div>
-                <div>
+                <div class="sorry">
                     <p> Sorry! </p>
                     <p> You cannot not use Popcorn Notes right now!</p>
-                    <Link to="/login"><p>Log in, please!</p></Link>
+                    <Link className="link" to="/login" ><p className="loginplease">Log in, please!</p></Link>
                 </div>      
             </div>}
-        </div>
+        </div>}
+        </>
+        
+        
+        
+      
     )
 }

@@ -1,18 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import './Home.css';
 import Icon from "./notesticker.js";
-import useUser from "./container/useUser";
 
 
 export default function Home() {
-    // const user = useUser();
-
-    // useEffect( async () => {
-    //     const token = user && await user.getIdToken();
-
-    // }, [user])
-    
-    
     return (
         <>
         <div className="grid-container">

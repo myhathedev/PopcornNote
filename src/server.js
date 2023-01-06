@@ -3,6 +3,8 @@ import { db,connectToDb } from "./db.js";
 import cors from "cors";
 import fs from 'fs';
 import admin from 'firebase-admin';
+import moment from 'moment';
+
 
 const credentials = JSON.parse(
     fs.readFileSync('./credential.json')
@@ -30,20 +32,6 @@ app.use(async (req,res,next) =>{
         next();
 })
 
-//get username
-app.get('/api/getusername/:uid',async (req,res) => {
-    const {uid} = req.params;
-    const response = await db.collection('users').findOne({uid : uid});
-    console.log(uid);
-    if (response) {
-        res.send(response.username);
-        console.log(response.username)
-        return;
-    } else {
-         res.send('Meow!');
-    }
-    
-});
 
 app.use((req,res,next) => {
     if (req.user) {
@@ -71,20 +59,36 @@ app.post('/api/signup/:username', async (req,res) => {
     }
 });
 
-
+//get username
+app.get('/api/getusername/:uid',async (req,res) => {
+    const {uid} = req.params;
+    const response = await db.collection('users').findOne({uid : uid});
+    console.log(uid);
+    if (response) {
+        res.send(response.username);
+        return;
+    } else {
+         res.send('Meow!');
+    }
+    
+});
 
 //new note
 app.post('/api/notelist/post/:username', async (req,res) => {
     const {title, content}= req.body;
     const {username} = req.params ;
     const {uid} = req.user;
+    const user =  await db.collection('users').findOne({uid});
+    const id = username+user.originalCount
     await db.collection('users').updateOne({username}, {$inc: {originalCount:1,updatedCount:1}});
     await db.collection('notelist').insertOne({
+        _id: id ,
         username: username, 
         uid: uid,
         title,
         content,
-        date: Date()
+        datecreated: moment().format('llll'),
+        dateupdated: moment().format('llll'),
     }); 
     const list = await db.collection('notelist').find().toArray();
    res.send(list);
@@ -99,28 +103,35 @@ app.get('/api/notelist/list',async (req,res) => {
 
 
 //update note
-app.post('/api/notelist/:id/update',async (req,res) => {
+app.put('/api/notelist/update/:id',async (req,res) => {
     const {id} = req.params;
-    await db.collection('notelist').updateOne({_id:id},{$set : {title: req.body.title,content: req.body.content }}) 
+    const {uid} = req.user;
+    await db.collection('notelist').updateOne({_id:id,uid:uid},{
+        $set : {
+            title: req.body.title,
+            content: req.body.content, 
+            dateupdated: moment().format('llll') }}) 
     res.send('ok');
 });
 
 
-
-app.get('/api/notelist/:id/get', async(req,res) => {
+//read a note
+app.get('/api/notelist/get/:id', async(req,res) => {
     const {id} = req.params;
     const note = await db.collection('notelist').findOne({_id : id});
     res.send(note);
 });
 
-app.delete('/api/notelist/:id/delete', async(req,res) => {
-    const {id} =  req.params;
-    const note = await db.collection('notelist').findOne({_id:id});
 
+//delete a note
+app.delete('/api/notelist/delete/:id', async(req,res) => {
+    const {id} =  req.params;
+    const {uid} = req.user;
+    const note = await db.collection('notelist').findOne({_id:id,uid:uid});
     if (note){
         await db.collection('notelist').deleteOne({_id:id});
-        await db.collection('users').updateOne({username:note.username}, {$inc : {updatedCount:-1}});
-        res.send('Deleted');
+        await db.collection('users').updateOne({uid:uid}, {$inc : {updatedCount:-1}});
+        res.send('Deleted. Please reset the list.');
     } else {
         res.send('This note does not exist.');
     }

@@ -13,7 +13,7 @@ export default function LogIn() {
         event.preventDefault();
         try {
         await signInWithEmailAndPassword(getAuth(),email,password);
-        nav("/note");
+        nav("/note/create");
         }
         catch (e) {
             setError(e.message);

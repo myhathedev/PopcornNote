@@ -2,6 +2,7 @@ import React , {useState , useEffect} from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import './NewNote.css';
+import useUser from "./useUser";
 
 
 export default function Read() {
@@ -13,28 +14,33 @@ export default function Read() {
     const [username,setUsername] = useState('');
     const [id,setId] = useState('')
     const [noti,setNoti] = useState('');
+    const [datecreated,setDatecreated] = useState('');
+    const [dateupdated,setDateupdated] = useState('');
     const [disable,setDisable] =useState(false);
-    
+    const {user} = useUser();
     
     useEffect(() => {
         const id = param.id;
         console.log(id);
         const load = async () => {
-        const respond = await axios.get(`http://localhost:8000/api/notelist/${id}/get`);
-        setNote (respond.data);
-        setTitle(note.title);
-        setContent(note.content);
-        setUsername(note.username);
-        setId(note._id);
+            const respond = await axios.get(`http://localhost:8000/api/notelist/get/${id}`);
+            setNote (respond.data);
+            setTitle(note.title);
+            setContent(note.content);
+            setUsername(note.username);
+            setDatecreated(note.datecreated);
+            setDateupdated(note.dateupdated);
+            setId(note._id);
         } 
         load();
         setDisable(false);
-    },[param,note.title,note.content,note._id,note.username])
+    },[param,note.title,note.content,note._id,note.username,note.datecreated,note.dateupdated])
 
     const handleUpdate =  async (event) => {
         event.preventDefault();
-        await axios.post(`http://localhost:8000/api/notelist/${id}/update`, { title: title, content: content,},
-        { "headers" : { "Content-Type": "application/json" }})
+        const token = user && await user.getIdToken();
+        await axios.put(`http://localhost:8000/api/notelist/update/${id}`, { title: title, content: content,},
+        { "headers" : { "Content-Type": "application/json", authtoken : token }})
         .catch(function(error) {
             console.log(error);
             })
@@ -47,8 +53,9 @@ export default function Read() {
 
     const handleDelete=  async (event) => {
         event.preventDefault();
-        await axios.delete(`http://localhost:8000/api/notelist/${id}/delete`,
-        { "headers" : { "Content-Type": "application/json" }})
+        const token = user && await user.getIdToken();
+        const response = await axios.delete(`http://localhost:8000/api/notelist/delete/${id}`,
+        { "headers" :{ authtoken : token }})
         .catch(function(error) {
             console.log(error);
             })
@@ -56,7 +63,7 @@ export default function Read() {
         setContent('');
         setTitle('');
         setUsername('');
-        setNoti('Note deleted. Please reset the list.');
+        setNoti(response.data);
             };
 
     return (
@@ -64,36 +71,28 @@ export default function Read() {
          <h1>Note</h1>
         <form>
             <div className="newform">
-                <div>
-                    <label  htmlFor="title">Title </label> <br />
-                    <input  
-                        type="text" id="title" name="title" size="60"
-                        value={title}
-                        onChange={e=> setTitle(e.target.value)}
-                       >
-                    </input><br />
-                </div>
-                <div>
-                    <label  htmlFor="username">Username </label> <br />
-                    <input  
-                        type="text" id="username" name="username" size="60"
-                        value={username}
-                        readOnly
-                        >
-                    </input><br />
-                </div>
-                <div>
+                <p className="text">User: <span className="username">{username}</span> </p>
+                <p className="text">Title: <span className="notetitle">{title}</span></p>
+
+                    <div className="formitem">
                     <label htmlFor="content">Content</label><br />
                     <textarea 
                         id="content" name="content" rows="15" cols="60"
-                        value={content}
+                        value={content || ''}
                         onChange={e => setContent(e.target.value)}
                         >
                     </textarea><br />
-                </div>
+                    <pre className="date">
+                    Created:      {datecreated} <br/>
+                    Last updated: {dateupdated}
+                    </pre>
+                    </div>
+                    
+                    <div className="formitem">
                 <button className="updatebutton" onClick={handleUpdate}>Update</button> 
                 <button type='button' className="deletebutton"  onClick={handleDelete} disabled={disable} >Delete</button>
                 <p className="noti">{noti}</p>
+                </div>
             </div>
         </form>
         </>
