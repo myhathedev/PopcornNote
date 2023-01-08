@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import './Signup.css';
+import useUser from "./container/useUser";
 
 export default function SignUp() {
     const [email,setEmail] = useState('');
@@ -9,6 +10,7 @@ export default function SignUp() {
     const [cpassword,setCpassword] = useState('');
     const [error,setError] = useState('');
     const nav = useNavigate();
+    const {user} = useUser();
     
 
     const createAccount = async (event) => {
@@ -28,6 +30,7 @@ export default function SignUp() {
 
     return (
         <>
+        {user? <Navigate to="/notfound" replace/> :
         <div className="signuppage">
         <p className="howdy">Create a new account</p>
         <form className="signupform" onSubmit={createAccount}>
@@ -65,7 +68,7 @@ export default function SignUp() {
         </div>
       </form>
         <p>Already have an account? <Link className="link"  to="/login"><span className="signin">Log In</span></Link> </p>
-        </div>
+        </div>}
         </>
     )
 

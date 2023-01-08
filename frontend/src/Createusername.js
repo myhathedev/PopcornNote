@@ -7,6 +7,7 @@ import './Createusername.css';
 export default function Createusername () {
     const [username,setUsername] = useState('');
     const {user} = useUser();
+    const currentusername = useUser().username;
     const [error,setError]=useState('');
     const [noti,setNoti] = useState('');
     
@@ -14,7 +15,7 @@ export default function Createusername () {
         event.preventDefault(); 
         try {
             const token = user && await user.getIdToken();
-            const respond = await axios.post(`http://localhost:8000/api/signup/${username}`, {},
+            const respond = await axios.post(`http://localhost:8000/api/${username}/signup`, {},
             { "headers" : { authtoken : token }},)
             console.log(respond.status);
             const data= respond.data;
@@ -34,6 +35,8 @@ export default function Createusername () {
 
 return (
     <>
+    {user? <p className="howdy currentusername">Your username is {currentusername}</p> 
+    :
         <div className="usernamepage">
         <form>
         <p className="howdy">What is your nick name? </p>
@@ -49,7 +52,7 @@ return (
         </form>
         <p className="error">{noti}</p>
         {error && <p className="error">{error}</p>}
-        </div>
+        </div> }
     </>
 
     )

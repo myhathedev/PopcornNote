@@ -1,0 +1,16 @@
+
+.notfound-grid {
+    display:grid;
+    grid-template-columns: 50% auto;
+    margin-top: 30px;
+    padding: 30px;
+    margin:auto;
+}
+
+.notfoundtext {
+    margin-top: 100px;
+}
+
+.notfoundtext p {
+    font-size: 40px;;
+}

@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 import { getAuth, signInWithEmailAndPassword} from 'firebase/auth';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./Login.css";
+import useUser from "./container/useUser";
 
 export default function LogIn() {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [error,setError] = useState('');
+    const {user} = useUser();
 
 
     const logIn = async(event) => {
@@ -22,6 +24,7 @@ export default function LogIn() {
 
     return (
         <>
+        {user? <Navigate to="/notfound" replace/> :
         <div className="signinpage">
             <p className="howdy">Howdy, Popcorn Member!</p>
         <form className="signinform">
@@ -53,7 +56,7 @@ export default function LogIn() {
         </div>
         </form>
         <p>Do not have an account? <Link to="/signup" className="link"><span className="signup">Sign Up</span></Link></p>
-        </div>
+        </div>}
         </>
     )
 

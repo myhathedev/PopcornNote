@@ -16,7 +16,7 @@ export default function useUser() {
                 const response = await axios.get(`http://localhost:8000/api/getusername/${uid}`);
                 setUsername(response.data);
             }
-            getusername();
+            if (user) {getusername()};
             console.log(username);
             setIsLoading(false);
         });

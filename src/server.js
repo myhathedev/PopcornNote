@@ -42,7 +42,7 @@ app.use((req,res,next) => {
 })
 
 //create user
-app.post('/api/signup/:username', async (req,res) => {
+app.post('/api/:username/signup', async (req,res) => {
     const {username} = req.params;
     const {uid} = req.user;
 
@@ -68,7 +68,7 @@ app.get('/api/getusername/:uid',async (req,res) => {
         res.send(response.username);
         return;
     } else {
-         res.send('visitor');
+         res.send('Error');
     }
     
 });
@@ -103,7 +103,7 @@ app.get('/api/notelist/list',async (req,res) => {
 
 
 //update note
-app.put('/api/notelist/update/:id',async (req,res) => {
+app.put('/api/notelist/:id/update',async (req,res) => {
     const {id} = req.params;
     const {uid} = req.user;
     await db.collection('notelist').updateOne({_id:id,uid:uid},{
@@ -116,7 +116,7 @@ app.put('/api/notelist/update/:id',async (req,res) => {
 
 
 //read a note
-app.get('/api/notelist/get/:id', async(req,res) => {
+app.get('/api/notelist/:id/get', async(req,res) => {
     const {id} = req.params;
     const note = await db.collection('notelist').findOne({_id : id});
     res.send(note);
@@ -124,7 +124,7 @@ app.get('/api/notelist/get/:id', async(req,res) => {
 
 
 //delete a note
-app.delete('/api/notelist/delete/:id', async(req,res) => {
+app.delete('/api/notelist/:id/delete', async(req,res) => {
     const {id} =  req.params;
     const {uid} = req.user;
     const note = await db.collection('notelist').findOne({_id:id,uid:uid});
