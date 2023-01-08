@@ -68,7 +68,7 @@ app.get('/api/getusername/:uid',async (req,res) => {
         res.send(response.username);
         return;
     } else {
-         res.send('Meow!');
+         res.send('visitor');
     }
     
 });

@@ -7,20 +7,12 @@ export default function NewNote() {
     const [title,setTitle] = useState('');
     const [content,setContent] = useState('');
     const [noti,setNoti] = useState('');
-    const {user} = useUser();
-
-    
-
-    //make the variable become JSON
-   
+    const user = useUser().user;
+    const username = useUser().username;
 
     const handleSubmit  =  async (event) => {
         event.preventDefault();
         const token = user && await user.getIdToken();
-        const uid = user &&  user.uid ;
-        console.log(uid);
-        const response = await axios.get(`http://localhost:8000/api/getusername/${uid}`);
-        const username = response.data;
         await axios.post(`http://localhost:8000/api/notelist/post/${username}`, { title: title,content: content},
         { "headers" : { "Content-Type": "application/json", authtoken : token,}})
         .catch(function(error) {console.log(error);});
@@ -35,7 +27,7 @@ export default function NewNote() {
         <h1>New Note</h1>
         <form>
             <div className="newform">
-                <div className="formitem">
+                <div className="form-item">
                     <label  htmlFor="title">Title </label> <br />
                     <input  
                         type="text" id="title" name="title" require="true" size="60"
@@ -43,7 +35,7 @@ export default function NewNote() {
                         onChange={e => setTitle(e.target.value) }>
                     </input><br />
                 </div>
-                <div className="formitem">
+                <div className="form-item">
                     <label htmlFor="content">Content</label><br />
                     <textarea 
                         id="content" name="content" rows="15" cols="60"
@@ -51,7 +43,7 @@ export default function NewNote() {
                         onChange={e => setContent(e.target.value) }>
                     </textarea><br />
                 </div>
-                <div className="formitem"> 
+                <div className="form-item"> 
                     <button className="createbutton" onClick={handleSubmit}>Create</button>
                     <p className="noti">{noti}</p>
                 </div>

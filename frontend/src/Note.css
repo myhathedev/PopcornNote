@@ -21,6 +21,7 @@
     padding: 10px;
 }
 
+
 .date {
     font-size: 10px;
 }
@@ -33,18 +34,27 @@
     
 }
 
-.newbutton {
+.new-button {
+    display: block;
+    float: right;
     padding: 5px 10px;
-    margin-left: 260px;
     font-size: 20px;
     border: black solid 2px;
     border-radius: 10px;
     background-color: #FFD387;
     color: black;
     font-weight: bold;
-    text-decoration: none;
+    margin-right: 150px;
+    margin-bottom: 20px;
+    margin-top: -20px;
+    cursor: pointer;
+
 }
 
+.your-note {
+    margin-top: 70px;
+    font-size: 20px;
+}
 
 
 .listgrid-container {
@@ -55,7 +65,7 @@
 }
 
 .loginplease {
-    color: #9198e5;
+    color:#3d4598;
     font-weight: 600;
     text-decoration-line: none;
     font-size: 30px;

@@ -1,7 +1,7 @@
 import React , {useState , useEffect} from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import './NewNote.css';
+import './Read.css';
 import useUser from "./useUser";
 
 
@@ -21,7 +21,6 @@ export default function Read() {
     
     useEffect(() => {
         const id = param.id;
-        console.log(id);
         const load = async () => {
             const respond = await axios.get(`http://localhost:8000/api/notelist/get/${id}`);
             setNote (respond.data);
@@ -74,7 +73,7 @@ export default function Read() {
                 <p className="text">User: <span className="username">{username}</span> </p>
                 <p className="text">Title: <span className="notetitle">{title}</span></p>
 
-                    <div className="formitem">
+                    <div className="formitem1">
                     <label htmlFor="content">Content</label><br />
                     <textarea 
                         id="content" name="content" rows="15" cols="60"
@@ -88,7 +87,7 @@ export default function Read() {
                     </pre>
                     </div>
                     
-                    <div className="formitem">
+                    <div className="formitem1">
                 <button className="updatebutton" onClick={handleUpdate}>Update</button> 
                 <button type='button' className="deletebutton"  onClick={handleDelete} disabled={disable} >Delete</button>
                 <p className="noti">{noti}</p>

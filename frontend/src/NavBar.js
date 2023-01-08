@@ -1,22 +1,24 @@
-import React from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import React  from 'react';
+import { Link } from 'react-router-dom';
 import "./NavBar.css";
-import useUser from './container/useUser';
-import { signOut,getAuth } from 'firebase/auth';
 
-export default function NavBar() {
-  const {user} = useUser();
-  const nav = useNavigate();
+
+export default function NavBar({user}) {
   return (
+
     <nav className="navbar">
       <ul>    
         <Link to="/" className="navitem"><li>Home</li></Link>
         <Link to="/note/create" className="navitem"><li>Your Note</li></Link>
+         {user? 
+        <Link to="/logout" className="navitem"><li>Log Out</li></Link>
+        :
+        <>
+          <Link to="/login" className="navitem"><li>Log In</li></Link>
+          <Link to="/signup" className="navitem"><li>Sign Up</li></Link>
+          </>
+        }
         <Link to="/contactus" className="navitem"><li>Contact Us</li></Link>
-        {user? 
-        <li onClick={()=> {signOut(getAuth());nav("/");}}>Log Out</li>
-        :<Link to="/login" className="navitem"><li>Log In</li></Link>
-      }
       </ul>         
     </nav>
   );

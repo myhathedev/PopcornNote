@@ -1,16 +1,14 @@
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useUser from "./container/useUser";
+import './Createusername.css';
 
 
 export default function Createusername () {
     const [username,setUsername] = useState('');
-    const nav = useNavigate();
     const {user} = useUser();
     const [error,setError]=useState('');
     const [noti,setNoti] = useState('');
-
     
     const createname = async (event) => {
         event.preventDefault(); 
@@ -25,7 +23,7 @@ export default function Createusername () {
                 return;
             } else {
                 setNoti('User successfully created.');
-                nav("/note");
+                window.location.replace("/note/create");
                 }
             } 
         catch (e) {
@@ -36,18 +34,23 @@ export default function Createusername () {
 
 return (
     <>
-         {error && <p className="error">{error}</p>}
+        <div className="usernamepage">
         <form>
-        <label htmlFor="username">Username: </label> <br />
+        <p className="howdy">What is your nick name? </p>
                 <input 
                     type="text" name="username"
+                    className="signininput"
+                    require="true" size="30"
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                     >
             </input> <br/>.
-        <button onClick={createname}>Create Username</button>
+        <button className="usernamebutton" onClick={createname}>Create</button>
         </form>
-        <p>{noti}</p>
+        <p className="error">{noti}</p>
+        {error && <p className="error">{error}</p>}
+        </div>
     </>
+
     )
 }

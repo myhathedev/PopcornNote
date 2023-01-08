@@ -10,6 +10,7 @@ export default function Note() {
     const [note,setNote] = useState([]);
     const navigate = useNavigate();
     const {user,isLoading} = useUser();
+    
 
     useEffect( () => {
         const load = async () => {
@@ -33,8 +34,8 @@ export default function Note() {
             <div>
             <div className ="listgrid-container">
                 <div > 
-                <Link to="/note/create" className="newbutton">New</Link> 
-                    <p className="yournote">Your Note <span className="reloadbutton" onClick={()=> {navigate(0)}}><i className="fa-sharp fa-solid fa-arrows-rotate"></i></span></p> 
+                    <p className="your-note">Your Note <span className="reloadbutton" onClick={()=> {navigate(0)}}><i className="fa-sharp fa-solid fa-arrows-rotate"></i></span></p> 
+                    <Link to="/note/create"><button className="new-button">New</button></Link> 
                     <div className="notelist">
                         {note.map( i => 
                             <Link className="link" to={`/note/${i._id}`} key={i._id}> <div >
@@ -53,7 +54,7 @@ export default function Note() {
                 <div>
                     <Popcorncry />
                 </div>
-                <div class="sorry">
+                <div className="sorry">
                     <p> Sorry! </p>
                     <p> You cannot not use Popcorn Notes right now!</p>
                     <Link className="link" to="/login" ><p className="loginplease">Log in, please!</p></Link>

@@ -29,7 +29,7 @@ h1 span:hover {
 #pop {
     width: 150px;
     font-size:3rem;
-    margin-top: -3rem;
+    margin-top: 10px;
     text-align: right;
 }
 #pop:hover {

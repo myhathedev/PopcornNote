@@ -1,11 +1,9 @@
 h1 {
     margin-top:0px;
-    margin-bottom: 0px;
 }
 .newform {
-    margin-top:20px;
     font-family: 'Quicksand', sans-serif;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .noti {
@@ -13,13 +11,11 @@ h1 {
     font-size: 14px;
 }
 #title, #content {
+    font-size: 14px;
     border: solid black 5px;
     border-radius:  5px;
 }
-.form-item {
-    margin-top: 20px;
 
-}
 .createbutton, .deletebutton, .updatebutton {
     border: solid black 1px;
     width: 90px;
@@ -33,6 +29,9 @@ h1 {
     
 }
 
+.formitem1 {
+    margin-top: 20px;
+}
 .text {
     font-size: 14px;
 }

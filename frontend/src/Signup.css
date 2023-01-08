@@ -1,0 +1,53 @@
+.signuppage {
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.formitem {
+    margin-top: 50px;
+}
+
+.signupbutton {
+    border: solid black 1px;
+    width: 90px;
+    font-size: 20px;
+    text-align: center;
+    background-color: #FFD387;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right : 20px;
+    
+}
+
+.signininput {
+    font-size: 20px;
+    border: solid black 5px;
+    border-radius:  5px;
+}
+
+.label{
+    font-size: 20px;
+}
+
+.signin , .howdy{
+    color: #3d4598;
+    font-weight: bold;
+}
+.link {
+    text-decoration: none;
+}
+
+.howdy {
+    font-size: 30px;
+    margin-bottom:30px;
+}
+.signin:hover {
+    color:rgb(171, 27, 27);
+}
+
+.error {
+    font-size: 14px;
+    color: red;
+}
