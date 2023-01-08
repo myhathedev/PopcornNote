@@ -3,8 +3,8 @@ import axios from "axios";
 import { useState } from "react";
 import "./Note.css";
 import { Link, Outlet, useNavigate} from "react-router-dom";
-import useUser from "./container/useUser";
-import Popcorncry from "./popcorncry";
+import useUser from "../hook/useUser";
+import Popcorncry from "../Images/popcorncry";
 
 export default function Note() {
     const [note,setNote] = useState([]);

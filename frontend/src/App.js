@@ -1,7 +1,7 @@
 import React  from "react";
-import NavBar from './NavBar';
-import Routes from './Route';
-import useUser from "./container/useUser";
+import NavBar from './Components/NavBar';
+import Routes from './Components/Route';
+import useUser from "./hook/useUser";
 
 function App() {
   const {user,isLoading,username} = useUser();

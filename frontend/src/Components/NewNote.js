@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, {useState} from "react";
 import "./NewNote.css";
-import useUser from "./useUser";
+import useUser from "../hook/useUser";
 
 export default function NewNote() {
     const [title,setTitle] = useState('');

@@ -1,6 +1,6 @@
 import React from "react";
 import './Home.css';
-import Icon from "./notesticker.js";
+import Icon from "../Images/notesticker.js";
 
 export default function Home() {
     return (

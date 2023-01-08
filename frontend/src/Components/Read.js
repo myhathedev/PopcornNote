@@ -2,7 +2,7 @@ import React , {useState , useEffect} from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import './Read.css';
-import useUser from "./useUser";
+import useUser from "../hook/useUser";
 
 
 export default function Read() {

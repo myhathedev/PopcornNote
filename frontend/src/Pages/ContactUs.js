@@ -1,7 +1,7 @@
 import React from "react";
 import "./ContactUs.css";
 import Typewriter from 'typewriter-effect';
-import AppreciationIcon from "./appreciation";
+import AppreciationIcon from "../Images/appreciation";
 
 
 export default function ContactUs() {
@@ -26,7 +26,7 @@ export default function ContactUs() {
         <div className="info">
             <p>Myha Cao</p>
             <p>Full-stack Website Developer</p>
-            <p>Email: caomyhalhp@gmail.com</p>
+            <p>Email: myhadev@gmail.com</p>
             <p>New Brunswick, Canada</p>
         </div>
     </div>

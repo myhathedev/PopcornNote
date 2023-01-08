@@ -1,5 +1,5 @@
 import React from "react";
-import Dizzy from "./popcorndizzy";
+import Dizzy from "../Images/popcorndizzy";
 import "./Notfound.css";
 
 export default function NotFound() {

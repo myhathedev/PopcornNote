@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import './Signup.css';
-import useUser from "./container/useUser";
+import useUser from "../hook/useUser";
 
 export default function SignUp() {
     const [email,setEmail] = useState('');
