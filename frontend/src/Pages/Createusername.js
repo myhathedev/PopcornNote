@@ -35,7 +35,7 @@ export default function Createusername () {
 
 return (
     <>
-    {user? <p className="howdy currentusername">Your username is {currentusername}</p> 
+    {currentusername? <p className="howdy currentusername">Your username is {currentusername}</p> 
     :
         <div className="usernamepage">
         <form>

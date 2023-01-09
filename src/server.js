@@ -4,7 +4,12 @@ import cors from "cors";
 import fs from 'fs';
 import admin from 'firebase-admin';
 import moment from 'moment';
+import { fileURLToPath } from "url";
+import path from "path";
+import "dotenv/config";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const credentials = JSON.parse(
     fs.readFileSync('./credential.json')
@@ -15,9 +20,15 @@ admin.initializeApp({
 })
 
 
+
 const app = express();
 app.use(express.json());
+app.use(express.static(path.join(__dirname,"../build")))
 app.use(cors({origin: true, credentials: true}));
+
+app.get(/^(?!\/api).+/, (req,res) => {
+    res.sendFile(path.join(__dirname,'../build/index.html'));
+})
 
 app.use(async (req,res,next) =>{
     const {authtoken } = req.headers;
@@ -68,7 +79,7 @@ app.get('/api/getusername/:uid',async (req,res) => {
         res.send(response.username);
         return;
     } else {
-         res.send('Error');
+         res.send(null);
     }
     
 });
@@ -138,9 +149,10 @@ app.delete('/api/notelist/:id/delete', async(req,res) => {
 }
 );
 
+const PORT = process.env.PORT || 8000;
 connectToDb(() => {
     console.log('Connect successfully');
-    app.listen(8000, () => {
-        console.log('server is listening on port 8000');
+    app.listen(PORT, () => {
+        console.log('server is listening on port '+PORT);
     });
 })
