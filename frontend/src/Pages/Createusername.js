@@ -15,7 +15,7 @@ export default function Createusername () {
         event.preventDefault(); 
         try {
             const token = user && await user.getIdToken();
-            const respond = await axios.post(`http://localhost:8000/api/${username}/signup`, {},
+            const respond = await axios.post(`http://localhost:${process.env.PORT||8000}/api/${username}/signup`, {},
             { "headers" : { authtoken : token }},)
             console.log(respond.status);
             const data= respond.data;

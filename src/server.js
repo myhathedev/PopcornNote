@@ -10,6 +10,8 @@ import "dotenv/config";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+console.log(__dirname);
+console.log(__filename);
 
 const credentials = JSON.parse(
     fs.readFileSync('./credential.json')
@@ -23,7 +25,7 @@ admin.initializeApp({
 
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname,"../build")))
+app.use(express.static(path.join(__dirname,"../build")));
 app.use(cors({origin: true, credentials: true}));
 
 app.get(/^(?!\/api).+/, (req,res) => {
@@ -74,7 +76,6 @@ app.post('/api/:username/signup', async (req,res) => {
 app.get('/api/getusername/:uid',async (req,res) => {
     const {uid} = req.params;
     const response = await db.collection('users').findOne({uid : uid});
-    console.log(uid);
     if (response) {
         res.send(response.username);
         return;
@@ -149,7 +150,7 @@ app.delete('/api/notelist/:id/delete', async(req,res) => {
 }
 );
 
-const PORT = process.env.PORT || 8000;
+const PORT = parseInt(process.env.PORT) || 8000;
 connectToDb(() => {
     console.log('Connect successfully');
     app.listen(PORT, () => {

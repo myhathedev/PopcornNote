@@ -13,7 +13,7 @@ export default function NewNote() {
     const handleSubmit  =  async (event) => {
         event.preventDefault();
         const token = user && await user.getIdToken();
-        await axios.post(`http://localhost:8000/api/notelist/post/${username}`, { title: title,content: content},
+        await axios.post(`http://localhost:${process.env.PORT||8000}/api/notelist/post/${username}`, { title: title,content: content},
         { "headers" : { "Content-Type": "application/json", authtoken : token,}})
         .catch(function(error) {console.log(error);});
         setContent('');
