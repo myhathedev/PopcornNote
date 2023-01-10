@@ -60,11 +60,6 @@ export default function Note() {
                     <Link className="link" to="/login" ><p className="loginplease">Log in, please!</p></Link>
                 </div>      
             </div>}
-        </div>}
+        </div>} 
         </>
-        
-        
-        
-      
-    )
-}
+        )}
