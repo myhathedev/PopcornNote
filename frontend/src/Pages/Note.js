@@ -16,7 +16,7 @@ export default function Note() {
         const load = async () => {
         const token = user && await user.getIdToken();
         //list notes
-        const respond = await axios.get(`http://localhost:${process.env.PORT||8000}/api/notelist/list`,
+        const respond = await axios.get(`http://localhost:8000/api/notelist/list`,
         {headers : {authtoken : token}});
         const newnote = respond.data;
         setNote(newnote);

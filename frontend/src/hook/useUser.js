@@ -13,7 +13,7 @@ export default function useUser() {
             const uid = user && user.uid;
             console.log(uid);
             const getusername = async () => {
-                const response = await axios.get(`http://localhost:${process.env.PORT||8000}/api/getusername/${uid}`);
+                const response = await axios.get(`http://localhost:8000/api/getusername/${uid}`);
                 setUsername(response.data);
             }
             if (user) {getusername()};

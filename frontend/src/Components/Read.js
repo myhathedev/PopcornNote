@@ -22,7 +22,7 @@ export default function Read() {
     useEffect(() => {
         const id = param.id;
         const load = async () => {
-            const respond = await axios.get(`http://localhost:${process.env.PORT||8000}/api/notelist/${id}/get`);
+            const respond = await axios.get(`http://localhost:8000/api/notelist/${id}/get`);
             setNote (respond.data);
             setTitle(note.title);
             setContent(note.content);
@@ -38,7 +38,7 @@ export default function Read() {
     const handleUpdate =  async (event) => {
         event.preventDefault();
         const token = user && await user.getIdToken();
-        await axios.put(`http://localhost:${process.env.PORT||8000}/api/notelist/${id}/update`, { title: title, content: content,},
+        await axios.put(`http://localhost:8000/api/notelist/${id}/update`, { title: title, content: content,},
         { "headers" : { "Content-Type": "application/json", authtoken : token }})
         .catch(function(error) {
             console.log(error);
@@ -53,7 +53,7 @@ export default function Read() {
     const handleDelete=  async (event) => {
         event.preventDefault();
         const token = user && await user.getIdToken();
-        const response = await axios.delete(`http://localhost:${process.env.PORT||8000}/api/notelist/${id}/delete`,
+        const response = await axios.delete(`http://localhost:8000/api/notelist/${id}/delete`,
         { "headers" :{ authtoken : token }})
         .catch(function(error) {
             console.log(error);
