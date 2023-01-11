@@ -2,6 +2,7 @@
   "name": "note",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://my-project-popcorn-374316.ue.r.appspot.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

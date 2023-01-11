@@ -16,7 +16,7 @@ export default function Note() {
         const load = async () => {
         const token = user && await user.getIdToken();
         //list notes
-        const respond = await axios.get("http://localhost:8000/api/notelist/list",
+        const respond = await axios.get(`/api/notelist/list`,
         {headers : {authtoken : token}});
         const newnote = respond.data;
         setNote(newnote);
@@ -60,6 +60,11 @@ export default function Note() {
                     <Link className="link" to="/login" ><p className="loginplease">Log in, please!</p></Link>
                 </div>      
             </div>}
-        </div>} 
+        </div>}
         </>
-        )}
+        
+        
+        
+      
+    )
+}

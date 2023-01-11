@@ -12,10 +12,11 @@ export default function Createusername () {
     const [noti,setNoti] = useState('');
     
     const createname = async (event) => {
+        
         event.preventDefault(); 
         try {
             const token = user && await user.getIdToken();
-            const respond = await axios.post(`http://localhost:8000/api/${username}/signup`, {},
+            const respond = await axios.post(`/api/${username}/signup`, {},
             { "headers" : { authtoken : token }},)
             console.log(respond.status);
             const data= respond.data;
